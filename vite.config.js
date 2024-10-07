@@ -7,4 +7,7 @@ export default defineConfig({
     react(),
     eslintPlugin(), // Make sure this is properly included
   ],
+  optimizeDeps: {
+    include: ["@tanstack/react-query-devtools"],
+  },
 });
