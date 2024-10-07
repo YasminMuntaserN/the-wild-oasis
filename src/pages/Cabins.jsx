@@ -5,8 +5,9 @@ import Button from "../ui/Button";
 import { useState } from "react";
 import CreateCabinForm from "../features/cabins/CreateCabinForm";
 
-const [showForm , setShowForm]=useState(false);
 function Cabins() {
+const [showForm , setShowForm]=useState(false);
+
   return (
     <>
     <Row>
