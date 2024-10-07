@@ -5,7 +5,7 @@ import Checkin from "./pages/Checkin";
 import Cabins from "./pages/Cabins";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
-import Account from "./pages/Account";
+ import Account from "./pages/Account";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 

@@ -3,8 +3,9 @@
 // import BookingTable from "../features/bookings/BookingTable";
 // import BookingTableOperations from "../features/bookings/BookingTableOperations";
 
-// function Bookings() {
-//   return (
+function Bookings() {
+  return (
+<div> hello from Account</div>
 //     <>
 //       <Row type="horizontal">
 //         <Heading as="h1">All bookings</Heading>
@@ -13,7 +14,7 @@
 
 //       <BookingTable />
 //     </>
-//   );
-// }
+  );
+}
 
-// export default Bookings;
+export default Bookings;

@@ -3,8 +3,9 @@
 // import Heading from "../ui/Heading";
 // import Row from "../ui/Row";
 
-// function Account() {
-//   return (
+  function Account() {
+  return (
+    <div> hello from Account</div>
 //     <>
 //       <Heading as="h1">Update your account</Heading>
 
@@ -18,7 +19,7 @@
 //         <UpdatePasswordForm />
 //       </Row>
 //     </>
-//   );
-// }
+);
+}
 
-// export default Account;
+export default Account;

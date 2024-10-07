@@ -13,14 +13,15 @@
 //   background-color: var(--color-grey-50);
 // `;
 
-// function Login() {
-//   return (
+function Login() {
+  return (
+    <div> hello from Checkin</div>
 //     <LoginLayout>
 //       <Logo />
 //       <Heading as="h4">Log in to your account</Heading>
 //       <LoginForm />
 //     </LoginLayout>
-//   );
-// }
+  );
+}
 
-// export default Login;
+ export default Login;
