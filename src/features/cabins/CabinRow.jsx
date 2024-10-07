@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCabin } from "../../services/apiCabins";
+import toast from "react-hot-toast";
 // import Table from "../../ui/Table";
 
 const TableRow = styled.div`
@@ -75,7 +76,7 @@ const { isLoading: isDeleting, mutate } = useMutation({
   mutationFn: deleteCabin,
 
   onSuccess: () => {
-    alert('Cabin successfully deleted');
+    toast.success('Cabin successfully deleted');
     
     // Invalidate the "cabins" query in the cache to force a refetch of cabins
     // This ensures the UI gets updated with the latest data after deletion
@@ -87,7 +88,7 @@ const { isLoading: isDeleting, mutate } = useMutation({
   // onError is called if there is an error during the mutation (delete operation)
   onError: err => {
     // Display the error message to the user
-    alert(err.message);
+    toast.error(err.message);
   },
 });
 
