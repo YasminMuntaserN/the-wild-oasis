@@ -10,4 +10,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ["@tanstack/react-query-devtools"],
   },
+  optimizeDeps: {
+    include: ['date-fns']
+  }
 });

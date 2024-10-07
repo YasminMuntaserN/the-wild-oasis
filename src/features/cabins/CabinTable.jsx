@@ -31,17 +31,20 @@ const TableHeader = styled.header`
 function CabinTable() {
   const {
     isLoading,
-    data: cabins,
-    error,
+    data: cabins
   } = useQuery({
-    queryKey: ['cabin'],
+    queryKey: ['cabins'],
     queryFn: getCabins,
   });
 
   if (isLoading) return <Spinner />;
 
   return (
+    //  this element here the role of a table.
     <Table role="table">
+    {/* And this one, the role of a row. 
+        instead using divs and  header here.we can specifying the role, we then make sure that the browser knows that this actually should be a table and a row
+    */}
       <TableHeader role="row">
         <div></div>
         <div>Cabin</div>
