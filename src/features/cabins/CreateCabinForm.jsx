@@ -10,7 +10,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { createCabin } from "../../services/apiCabins";
 
-// import { useCreateCabin } from "./useCreateCabin";
 // import { useEditCabin } from "./useEditCabin";
 
 // function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
@@ -161,8 +160,8 @@ import { createCabin } from "../../services/apiCabins";
 // export default CreateCabinForm;
 
 function CreateCabinForm() {
-  const {register ,handleSubmit ,reset} =useForm();
-
+  const {register ,handleSubmit ,reset , getValues ,formState} =useForm();
+  const{errors} =formState;
   const queryClient=useQueryClient();
   const {mutate , isLoading :isCreating}=useMutation({
     mutationFn :createCabin,
@@ -177,38 +176,72 @@ function CreateCabinForm() {
   });
 
   function onSubmit(data){
-    mutate(data);  
+    mutate({...data ,image :data.image[0]});  
   }
+
+  function onError(errors){
+      console.log(errors);
+  }
+
   return (
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormRow>
-          <label htmlFor="name">Cabin name</label>
-          <Input type="text" id="name" {...register("name")}/>
+      <Form onSubmit={handleSubmit(onSubmit ,onError)}>
+        <FormRow label="Cabin name" error ={errors?.name?.message}>
+          <Input
+              type="text"
+              id="name" 
+              disabled={isCreating}
+              {...register("name"  ,{
+                required:"This field is required"
+          })}/>
         </FormRow>
 
-        <FormRow>
-          <label htmlFor="maxCapacity">Maximum capacity</label>
-          <Input type="number" id="maxCapacity" {...register("maxCapacity")}/>
+        <FormRow label="Maximum Capacity" error ={errors?.maxCapacity?.message}>
+          <Input type="number"
+                  id="maxCapacity" 
+                  disabled={isCreating}
+                  {...register("maxCapacity",{
+                required:"This field is required",
+                min:{value:1 ,message:'Capacity should at least one'}
+          })}/>
         </FormRow>
 
-        <FormRow>
-          <label htmlFor="regularPrice">Regular Price</label>
-          <Input type="number" id="regularPrice"  defaultValue={0}{...register("regularPrice")}/>
+        <FormRow label="Regular Price" error ={errors?.regularPrice?.message}>
+          <Input type="number"
+                  id="regularPrice" 
+                  defaultValue={0}
+                  disabled={isCreating}
+                  {...register("regularPrice",{
+                required:"This field is required"
+          })}/>
         </FormRow>
 
-        <FormRow>
-          <label htmlFor="discount">Discount</label>
-          <Input type="number" id="discount" {...register("discount")}/>
+        <FormRow label="Discount" error ={errors?.discount?.message}>
+          <Input type="number"
+                  id="discount"
+                  defaultValue={0}
+                  disabled={isCreating}
+                  {...register("discount",{
+                required:"This field is required",
+                validate:(value)=>value <=  getValues().regularPrice || 'Discount should be less than regular Price'
+          })}/>
         </FormRow>
 
-        <FormRow>
-          <label htmlFor="description">Description</label>
-          <Input type="text" id="description" {...register("description")}/>
+        <FormRow label="Description for website" error ={errors?.description?.message}>
+          <Input type="text"
+                  id="description"
+                  disabled={isCreating} 
+          {...register("description",{
+                required:"This field is required"
+          })}/>
         </FormRow>
 
-        <FormRow>
-          <label htmlFor="image">Cabin photo</label>
-          <FileInput  id="image" accept="image/*" />
+        <FormRow label="Cabin photo" >
+          <FileInput  id="image"
+                      accept="image/*" 
+                      type="file"
+                  {...register("image",{
+                        required:"This field is required"
+                  })}/>
         </FormRow>
 
         <Button disabled={isCreating}>Add Cabin</Button>
