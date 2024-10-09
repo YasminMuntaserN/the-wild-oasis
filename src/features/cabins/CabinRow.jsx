@@ -1,12 +1,9 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-
 import styled from "styled-components";
-import toast from "react-hot-toast";
 import { useState } from "react";
 
 import { formatCurrency } from "../../utils/helpers";
-import { deleteCabin } from "../../services/apiCabins";
 import CreateCabinForm from "./CreateCabinForm";
+import { useDeleteCabin } from "./useDeleteCabin";
 // import Table from "../../ui/Table";
 
 const TableRow = styled.div`
@@ -50,6 +47,7 @@ const Discount = styled.div`
 
 function CabinRow({ cabin }) {
   const [showForm , setShowForm]=useState(false);
+  const {isDeleting, deleteCabin}=useDeleteCabin();
 
   const {
     id: cabinId,
@@ -60,34 +58,6 @@ function CabinRow({ cabin }) {
     image,
   } = cabin;
 
-// Create a new instance of the query client, used to manage and interact with queries
-const queryClient = useQueryClient();
-
-// Destructure the mutation object returned by useMutation.
-// isLoading is renamed to isDeleting to indicate that a delete operation is in progress
-// mutate is the function used to trigger the mutation (delete operation)
-const { isLoading: isDeleting, mutate } = useMutation({
-  
-  // mutationFn is the function responsible for performing the mutation (in this case, deleting a cabin)
-  mutationFn: deleteCabin,
-
-  onSuccess: () => {
-    toast.success('Cabin successfully deleted');
-    
-    // Invalidate the "cabins" query in the cache to force a refetch of cabins
-    // This ensures the UI gets updated with the latest data after deletion
-    queryClient.invalidateQueries({
-      queryKey: ["cabins"]
-    });
-  },
-
-  // onError is called if there is an error during the mutation (delete operation)
-  onError: err => {
-    // Display the error message to the user
-    toast.error(err.message);
-  },
-});
-
   return (
     <>
     <TableRow>
@@ -95,10 +65,10 @@ const { isLoading: isDeleting, mutate } = useMutation({
       <Cabin>{name}</Cabin>
       <div>Fits Up to {maxCapacity} guests</div>
       <Price>{formatCurrency(regularPrice)}</Price>
-      <Discount>{formatCurrency(discount)}</Discount>
+      {discount?(<Discount>{formatCurrency(discount)}</Discount>):(<span>&mdash;</span>)}
       <div>
       <button onClick={()=>setShowForm((show)=>!show)} >Edit</button>
-      <button onClick={()=>mutate(cabinId)} disabled={isDeleting}>Delete</button>
+      <button onClick={()=>deleteCabin(cabinId)} disabled={isDeleting}>Delete</button>
       </div>
     </TableRow>
     {showForm && <CreateCabinForm cabinToEdit={cabin}/> }
