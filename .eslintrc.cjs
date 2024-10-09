@@ -19,5 +19,6 @@ module.exports = {
     // Disable the prop-types rule
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "off",
   },
 };
