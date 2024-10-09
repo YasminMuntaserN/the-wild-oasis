@@ -11,8 +11,8 @@ function UpdateSettingsForm() {
     settings: {
       minBookingLength,
       maxBookingLength,
-      maxGuestsPerBooking,
-      breakfastPrice,
+      maxGuestsperBooking,
+      brakefastPrice,
     } = {},
   } = useSettings();
   const { isUpdating, updateSetting } = useUpdateSetting();
@@ -52,9 +52,9 @@ function UpdateSettingsForm() {
         <Input
           type="number"
           id="max-guests"
-          defaultValue={maxGuestsPerBooking}
+          defaultValue={maxGuestsperBooking}
           disabled={isUpdating}
-          onBlur={(e) => handleUpdate(e, "maxGuestsPerBooking")}
+          onBlur={(e) => handleUpdate(e, "maxGuestsperBooking")}
         />
       </FormRow>
 
@@ -62,9 +62,9 @@ function UpdateSettingsForm() {
         <Input
           type="number"
           id="breakfast-price"
-          defaultValue={breakfastPrice}
+          defaultValue={brakefastPrice}
           disabled={isUpdating}
-          onBlur={(e) => handleUpdate(e, "breakfastPrice")}
+          onBlur={(e) => handleUpdate(e, "brakefastPrice")}
         />
       </FormRow>
     </Form>
