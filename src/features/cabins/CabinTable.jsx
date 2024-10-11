@@ -28,29 +28,28 @@ const TableHeader = styled.header`
 `;
 
 function CabinTable() {
-  const {isLoading,cabins} =useCabins();
+    const { isLoading, cabins } = useCabins();
 
-  if (isLoading) return <Spinner />;
+    if (isLoading) return <Spinner />;
 
-  return (
-    //  this element here the role of a table.
-    <Table role="table">
-    {/* And this one, the role of a row. 
+    return (
+        <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+            {/* And this one, the role of a row. 
         instead using divs and  header here.we can specifying the role, we then make sure that the browser knows that this actually should be a table and a row
     */}
-      <TableHeader role="row">
-        <div></div>
-        <div>Cabin</div>
-        <div>Capacity</div>
-        <div>Price</div>
-        <div>Discount</div>
-        <div></div>
-      </TableHeader>
-      {cabins.map((cabin) => (
-        <CabinRow cabin={cabin} key={cabin.id} />
-      ))}
-    </Table>
-  );
+            <Table.Header role="row">
+                <div></div>
+                <div>Cabin</div>
+                <div>Capacity</div>
+                <div>Price</div>
+                <div>Discount</div>
+                <div></div>
+            </Table.Header>
+            <Table.Body data={cabins} render={(cabin) => (
+                <CabinRow cabin={cabin} key={cabin.id} />
+            ) } />
+        </Table>
+    );
 }
 
 export default CabinTable;
