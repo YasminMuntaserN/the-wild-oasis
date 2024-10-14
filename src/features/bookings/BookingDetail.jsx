@@ -1,22 +1,22 @@
 import styled from "styled-components";
 
-// import BookingDataBox from "./BookingDataBox";
+import BookingDataBox from "./BookingDataBox";
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import Tag from "../../ui/Tag";
-// import ButtonGroup from "../../ui/ButtonGroup";
-// import Button from "../../ui/Button";
+import ButtonGroup from "../../ui/ButtonGroup";
+import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "./useBooking";
 import Spinner from "../../ui/Spinner";
-// import { useNavigate } from "react-router-dom";
-// import { HiArrowUpOnSquare } from "react-icons/hi2";
-// import { useCheckout } from "../check-in-out/useCheckout";
-// import Modal from "../../ui/Modal";
-// import ConfirmDelete from "../../ui/ConfirmDelete";
-// import { useDeleteBooking } from "./useDeleteBooking";
+import { useNavigate } from "react-router-dom";
+import { HiArrowUpOnSquare } from "react-icons/hi2";
+import { useCheckout } from "../check-in-out/useCheckout";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -26,11 +26,11 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
   const { booking, isLoading } = useBooking();
-  // const { checkout, isCheckingOut } = useCheckout();
-  // const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { checkout, isCheckingOut } = useCheckout();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
 
   const moveBack = useMoveBack();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
 
@@ -52,7 +52,7 @@ function BookingDetail() {
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      {/* <BookingDataBox booking={booking} />
+      <BookingDataBox booking={booking} /> 
 
       <ButtonGroup>
         {status === "unconfirmed" && (
@@ -82,7 +82,7 @@ function BookingDetail() {
               disabled={isDeleting}
               onConfirm={() =>
                 deleteBooking(bookingId, {
-                  onSettled: () => navigate(-1),
+                  onSettled: () => navigate(-1),//the onSettled mean that this will always happen
                 })
               }
             />
@@ -92,7 +92,7 @@ function BookingDetail() {
         <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>
-      </ButtonGroup> */}
+      </ButtonGroup> 
     </>
   );
 }
