@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import DurationChart from '../dashboard/DurationChart';
-import SalesChart from '../dashboard/SalesChart';
+// import SalesChart from '../dashboard/SalesChart';
 import Stats from '../dashboard/Stats';
 import TodayActivity from '../check-in-out/TodayActivity';
 import { useRecentBookings } from '../dashboard/useRecentBookings';
@@ -39,7 +39,7 @@ function DashboardLayout() {
       />
       <TodayActivity />
       <DurationChart confirmedStays={confirmedStays} />
-      <SalesChart bookings={bookings} numDays={numDays} />
+      {/* <SalesChart bookings={bookings} numDays={numDays} /> */}
     </StyledDashboardLayout>
   );
 }
