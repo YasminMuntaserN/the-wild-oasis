@@ -31,7 +31,7 @@ Welcome to The Wild Oasis Hotel Management Application documentation. The Wild O
 </div>
 
 ## 🚀 Live Demo
- [this link](https://the-wild-oasis-f8vp-9lk7x9hcv-yasminmuntaserns-projects.vercel.app)
+ [this link](https://the-wild-oasis-f8vp.vercel.app/)
 
 
 
